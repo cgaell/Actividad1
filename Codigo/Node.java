@@ -1,10 +1,10 @@
-package Actividad1;
+package Actividad1.Actividad1.Codigo;
 
-public class Node {
-    int data;
-    Node next;
+public class Node<I> {
+    I data;
+    Node<I> next;
 
-    public Node(int data){
+    public Node(I data){
         this.data = data;
         this.next = null;
     }

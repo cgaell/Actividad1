@@ -1,5 +1,5 @@
-package Actividad1;
+package Actividad1.Actividad1.Codigo;
 
-public class LinkedList {
-    private Node head;
+public class LinkedList<I> {
+    private Node<I> head;
 }
