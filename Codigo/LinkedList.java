@@ -14,4 +14,10 @@ public class LinkedList<I> {
     public Node<I> getCabeza() {
         return cabeza;
     }
-}
+
+    public void insertarCabeza(I datos) {
+        Node<I> nuevoNodo = new Node<>(datos, cabeza);
+        cabeza = nuevoNodo;
+        }
+    }
+
