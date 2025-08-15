@@ -1,16 +1,15 @@
 package Actividad1.Actividad1.Codigo;
 
-import java.util.List;
 
-public class LinkedList<I> {
+public class DoubleLinkedList<I> {
     private Node<I> cabeza;
     private Node<I> cola;
 
-    public LinkedList() {
+    public DoubleLinkedList() {
         this.cabeza = null;
         this.cola = null;
     }
-    public LinkedList(Node<I> cabeza, Node<I> cola) {
+    public DoubleLinkedList(Node<I> cabeza, Node<I> cola) {
         this.cabeza = cabeza;
         this.cola = cola;
     }
