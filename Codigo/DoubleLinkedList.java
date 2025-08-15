@@ -54,5 +54,47 @@ public class DoubleLinkedList<I> {
             actual = actual.siguiente;
         }
     }
+    public void mostrarReversa() {
+    Node<I> actual = cola;
+    while (actual != null) {
+        System.out.print(actual.datos + " ");
+        actual = actual.anterior;
+    }
+    System.out.println();
+}
+public void eliminarCabeza() {
+        if (cabeza != null) {
+            cabeza = cabeza.siguiente;
+            if (cabeza != null) {
+                cabeza.anterior = null;
+            } else {
+                cola = null; // Si la lista queda vacía, actualizar cola
+            }
+        }
+    }
+
+    public void eliminarCola() {
+        if (cola != null) {
+            cola = cola.anterior;
+            if (cola != null) {
+                cola.siguiente = null;
+            } else {
+                cabeza = null; // Si la lista queda vacía, actualizar cabeza
+            }
+        }
+    }
+    public void buscar(I datos) {
+        Node<I> actual = cabeza;
+        while (actual != null) {
+            if (actual.datos.equals(datos)) {
+                System.out.println("Dato encontrado: " + datos);
+                return;
+            }
+            actual = actual.siguiente;
+        }
+        System.out.println("Dato no encontrado: " + datos);
+    }
+    
+
 }
 
