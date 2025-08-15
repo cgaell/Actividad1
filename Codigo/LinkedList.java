@@ -19,5 +19,7 @@ public class LinkedList<I> {
         Node<I> nuevoNodo = new Node<>(datos, cabeza);
         cabeza = nuevoNodo;
         }
+
+        
     }
 
