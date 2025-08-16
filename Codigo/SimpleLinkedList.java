@@ -16,47 +16,91 @@ public class SimpleLinkedList<I> {
 		return cabeza;
 	}
 
-	public void insertarCabeza(I datos) {
-        Node<I> nuevoNodo = new Node<>(datos);
-		nuevoNodo.siguiente = cabeza;
+	public void insertarCabeza(I valor) {
+        Node<I> nuevoNodo = new Node<>(valor);
+		nuevoNodo.setNext(this.cabeza);
         cabeza = nuevoNodo;
 	}
-    public void insertarCola(I datos) {
-        Node<I> nuevoNodo = new Node<>(datos);
+    
+    
+    
+    public void insertarCola(I valor) {
+        Node<I> nuevoNodo = new Node<>(valor);
         if (cabeza == null) {
             cabeza = nuevoNodo;
         } else {
-            Node<I> actual = cabeza;
-            while (actual.siguiente != null) {
-                actual = actual.siguiente;
+            Node<I> actual = this.cabeza;
+            while (actual.getNext() != null) {
+                actual = actual.getNext();
             }
-            actual.siguiente = nuevoNodo;
+            actual.setNext(nuevoNodo);
         }
     }
-    public void eliminarCabeza() {
-        if (cabeza != null) {
-            cabeza = cabeza.siguiente;
+
+
+
+
+    public int buscar(I valor) {
+        Node<I> actual = cabeza;
+        int posicion = 1;
+        while (actual != null) {
+            if (actual.getDatos().equals(valor)) {
+                System.out.println("Dato encontrado: " + valor);
+                return posicion;
+            }
+            actual = actual.getNext();
+            posicion++;
         }
+        return -1;
     }
-    public void buscar(I datos) {
+        
+        public boolean actualizar(I nuevo, I viejo) {
         Node<I> actual = cabeza;
         while (actual != null) {
-            if (actual.datos.equals(datos)) {
-                System.out.println("Dato encontrado: " + datos);
-                return;
+            if (actual.getDatos().equals(viejo)) {
+                actual.setDatos(nuevo);
+                return true;
             }
-            actual = actual.siguiente;
+            actual = actual.getNext();
         }
-        System.out.println("Dato no encontrado: " + datos);
-    }
-    public void mostrarLista() {
-        Node<I> actual = cabeza;
-        while (actual != null) {
-            System.out.print(actual.datos + " ");
-            actual = actual.siguiente;
-        }
-        System.out.println();
-    }
+        return false;
 }
+    public boolean eliminarNodo(I valor) {
+        if (cabeza == null){
+            return false;
+        }
+
+        if (cabeza.getNext() == null){
+            if (cabeza.getDatos().equals(valor)){
+                cabeza = null;
+                return true;
+            }
+            return false;
+        }
+
+        Node<I> actual = cabeza;
+        Node<I> anterior = cabeza.getNext();
+
+        while (actual != null) {
+            if (actual.getNext().getDatos().equals(valor)){
+                if (anterior!= null){
+                    anterior.setNext(null);
+                }
+                else {
+                    anterior.setNext(actual.getNext());
+                }
+                return true;
+            }
+            anterior = actual;
+            actual = actual.getNext();
+        }
+          return false;  
+    }
+        
+}
+
+        
+    
+
 
 
