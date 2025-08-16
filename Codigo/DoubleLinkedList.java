@@ -67,6 +67,56 @@ public class DoubleLinkedList<I> {
     }
     System.out.println();
 }
+public int buscar( I valor) {
+    Node<I> actual = this.cabeza;
+    int posicion = 1;
+    while (actual != null) {
+        if (actual.getDatos().equals(valor)) {
+            System.out.println("Dato encontrado: " + valor);
+            return posicion;
+        }
+        actual = actual.getNext();
+        posicion++;
+    }
+    return -1;
+}
+
+    public boolean actualizar(I viejo, I nuevo) {
+        Node<I> actual = this.cabeza;
+        while (actual != null) {
+            if (actual.getDatos().equals(viejo)) {
+                actual.setDatos(nuevo);
+                return true;
+            }
+            actual = actual.getNext();
+        }
+        return false;
+    }
+    public void borrar(I valor) {
+        if (cabeza == null) {
+            return;
+        }
+        if (cabeza.getNext() == null) {
+            if (cabeza.getDatos().equals(valor)) {
+                cabeza = null;            
+            }
+                return;
+        }
+        Node<I> actual = cabeza;
+        Node<I> anterior = null;
+
+        while (actual != null) {
+            if (actual.getDatos().equals(valor)) {
+                if (anterior != null) {
+                    anterior.setNext(actual.getNext());
+                }
+                return;
+            }
+            anterior = actual;
+            actual = actual.getNext();
+        }
+    }
+}
 
 
 
