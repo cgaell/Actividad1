@@ -38,7 +38,17 @@ public class SimpleLinkedList<I> {
     }
 
 
-
+    public void mostrarLista() {
+        Node<I> actual = this.cabeza;
+        while (actual != null) {
+            System.out.print(actual.getDatos());
+            if (actual.getNext() != null) {
+                System.out.print(" <-> ");
+            }
+            actual = actual.getNext();
+        }
+        System.out.println();
+    }
 
     public int buscar(I valor) {
         Node<I> actual = cabeza;
