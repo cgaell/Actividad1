@@ -28,4 +28,9 @@ public class Contacto {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+
+        
+        public String toString() {
+            return "Nombre: " + nombre + ", Teléfono: " + telefono + ", Dirección: " + direccion;
+        }
 }

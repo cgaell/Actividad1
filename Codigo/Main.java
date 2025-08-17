@@ -113,7 +113,7 @@ public class Main {
                         System.out.print("Ingrese el telefono del contacto: ");
                         telefono = scanner.nextLine();
                         System.out.println("Ingrese la direccion del contacto: ");
-                        String direccion = scanner.nextLine();
+                        direccion = scanner.nextLine(); // Usar la variable ya declarada
                         nuevoContacto = new Contacto(nombre, telefono, direccion);
                         lista.insertarCola(nuevoContacto);
                         System.out.println("Contacto agregado");
@@ -131,7 +131,8 @@ public class Main {
                     case 4:
                         System.out.println("Ingrese el contacto a eliminar: ");
                         String eliminarNombre = scanner.nextLine();
-                        lista.eliminarNodo(nuevoContacto);
+                        Contacto contactoEliminar = new Contacto(eliminarNombre, "", "");
+                        lista.eliminarNodo(contactoEliminar);
                         System.out.println("Contacto eliminado");
                         break;
                     case 5:
@@ -143,8 +144,8 @@ public class Main {
                         String nuevoTelefono = scanner.nextLine();
                         System.out.println("Ingrese la nueva direccion del contacto: ");
                         String nuevaDireccion = scanner.nextLine();
-                        Contacto nuevoContacto = new Contacto(nuevoNombre, nuevoTelefono, nuevaDireccion);
-                        lista.actualizar(viejoNombre, nuevoContacto);
+                        Contacto nuevoContactoActualizado = new Contacto(nuevoNombre, nuevoTelefono, nuevaDireccion);
+                        lista.actualizar(new Contacto(viejoNombre, "", ""), nuevoContactoActualizado);
                         break;
                     case 6:
                         lista.mostrarLista();
@@ -159,6 +160,7 @@ public class Main {
                 System.out.println("Opcion no valida. Intente de nuevo.");
                 pausar();
             }
+            pausar();
             limpiar();
         } while (opcion != 0);
     }
@@ -202,7 +204,7 @@ private static void menuListaDoble(){
                         System.out.print("Ingrese el telefono del contacto: ");
                         telefono = scanner.nextLine();
                         System.out.println("Ingrese la direccion del contacto: ");
-                        direccion = scanner.nextLine();
+                        direccion = scanner.nextLine(); // Usar la variable ya declarada
                         nuevoContacto = new Contacto(nombre, telefono, direccion);
                         lista.insertarCola(nuevoContacto);
                         System.out.println("Contacto agregado");
@@ -220,7 +222,8 @@ private static void menuListaDoble(){
                     case 4:
                         System.out.println("Ingrese el contacto a eliminar: ");
                         String eliminarNombre = scanner.nextLine();
-                        lista.eliminarNodo(nuevoContacto);
+                        Contacto contactoEliminar = new Contacto(eliminarNombre, "", "");
+                        lista.eliminarNodo(contactoEliminar);
                         System.out.println("Contacto eliminado");
                         pausar();
                         break;
@@ -235,8 +238,8 @@ private static void menuListaDoble(){
                         System.out.println("Ingrese la nueva direccion del contacto: ");
                         String nuevaDireccion = scanner.nextLine();
                         Contacto actualizadoContacto = new Contacto(nuevoNombre, nuevoTelefono, nuevaDireccion);
-                        lista.actualizar(viejoNombre, actualizadoContacto);
-                        break;
+                        lista.actualizar(new Contacto(viejoNombre, "", ""), actualizadoContacto);
+                        break;      
 
                     case 6:
                         lista.mostrarLista();
@@ -260,6 +263,7 @@ private static void menuListaDoble(){
                     System.out.println("Opcion no valida. Intente de nuevo.");
                     pausar();
                 }
+                pausar();
                 limpiar();
             } while ((opcion!= 0));
                 
@@ -299,12 +303,12 @@ private static void menuListaDoble(){
                         System.out.println("Contacto agregado");
                         break;
                     case 2:
-                    System.out.print("Ingrese el nombre del contacto: ");
+                        System.out.print("Ingrese el nombre del contacto: ");
                         nombre = scanner.nextLine();
                         System.out.print("Ingrese el telefono del contacto: ");
                         telefono = scanner.nextLine();
                         System.out.println("Ingrese la direccion del contacto: ");
-                        String direccion = scanner.nextLine();
+                        direccion = scanner.nextLine(); // Usar la variable ya declarada
                         nuevoContacto = new Contacto(nombre, telefono, direccion);
                         lista.insertarCola(nuevoContacto);
                         System.out.println("Contacto agregado");
@@ -322,12 +326,13 @@ private static void menuListaDoble(){
                     case 4:
                     System.out.println("Ingrese el contacto a eliminar: ");
                         String eliminarNombre = scanner.nextLine();
-                        lista.eliminarNodo(nuevoContacto);
+                        Contacto contactoEliminar = new Contacto(eliminarNombre, "", "");
+                        lista.eliminarNodo(contactoEliminar);
                         System.out.println("Contacto eliminado");
                         pausar();
                         break;
                     case 5:
-                    System.out.println("Ingrese el contacto a actualizar: ");
+                        System.out.println("Ingrese el contacto a actualizar: ");
                         String viejoNombre = scanner.nextLine();
                         System.out.println("Ingrese el nuevo nombre del contacto: ");
                         String nuevoNombre = scanner.nextLine();
@@ -336,7 +341,7 @@ private static void menuListaDoble(){
                         System.out.println("Ingrese la nueva direccion del contacto: ");
                         String nuevaDireccion = scanner.nextLine();
                         Contacto actualizadoContacto = new Contacto(nuevoNombre, nuevoTelefono, nuevaDireccion);
-                        lista.actualizar(viejoNombre, actualizadoContacto);
+                        lista.actualizar(new Contacto(viejoNombre, "", ""), actualizadoContacto);
                         break;
                     case 6:
                      lista.mostrarLista();
@@ -361,6 +366,7 @@ private static void menuListaDoble(){
                 System.out.println("Opcion no valida");
                 pausar();
             }
+            pausar();
             limpiar();
         } while (opcion != 0);
     }
@@ -369,7 +375,7 @@ private static void menuListaDoble(){
         System.out.println("");
         System.out.println("Presiona Enter para poder continuar");
         try {
-            scanner.nextLine();
+            System.in.read();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -381,18 +387,21 @@ private static void menuListaDoble(){
     private static void ejemplosListaSimple() {
         DataTypeExamples ejemplo = new DataTypeExamples();
         ejemplo.ejemploListaSimple();
+        pausar();
         limpiar();
     }
 
     private static void ejemplosListaDoble() {
         DataTypeExamples ejemplo = new DataTypeExamples();
         ejemplo.ejemploListaDoble();
+        pausar();
         limpiar();
     }
 
     private static void ejemplosListaCircular() {
         DataTypeExamples ejemplo = new DataTypeExamples();
         ejemplo.ejemploListaCircular();
+        pausar();
         limpiar();
     }
 
