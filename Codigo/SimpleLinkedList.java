@@ -1,35 +1,35 @@
 
 package Codigo;
 
-public class SimpleLinkedList<I> {
-	private Node<I> cabeza;
+public class SimpleLinkedList<Contacto> {
+	private Node<Contacto> cabeza;
 
 	public SimpleLinkedList() {
 		this.cabeza = null;
 	}
 
-	public SimpleLinkedList(Node<I> cabeza){
+	public SimpleLinkedList(Node<Contacto> cabeza){
 		this.cabeza = cabeza;
 	}
 
-	public Node<I> getCabeza() {
+	public Node<Contacto> getCabeza() {
 		return cabeza;
 	}
 
-	public void insertarCabeza(I valor) {
-        Node<I> nuevoNodo = new Node<>(valor);
+	public void insertarCabeza(Contacto valor) {
+        Node<Contacto> nuevoNodo = new Node<>(valor);
 		nuevoNodo.setNext(this.cabeza);
         cabeza = nuevoNodo;
 	}
     
     
     
-    public void insertarCola(I valor) {
-        Node<I> nuevoNodo = new Node<>(valor);
+    public void insertarCola(Contacto valor) {
+        Node<Contacto> nuevoNodo = new Node<>(valor);
         if (cabeza == null) {
             cabeza = nuevoNodo;
         } else {
-            Node<I> actual = this.cabeza;
+            Node<Contacto> actual = this.cabeza;
             while (actual.getNext() != null) {
                 actual = actual.getNext();
             }
@@ -39,7 +39,7 @@ public class SimpleLinkedList<I> {
 
 
     public void mostrarLista() {
-        Node<I> actual = this.cabeza;
+        Node<Contacto> actual = this.cabeza;
         while (actual != null) {
             System.out.print(actual.getDatos());
             if (actual.getNext() != null) {
@@ -50,8 +50,8 @@ public class SimpleLinkedList<I> {
         System.out.println();
     }
 
-    public int buscar(I valor) {
-        Node<I> actual = cabeza;
+    public int buscar(Contacto valor) {
+        Node<Contacto> actual = cabeza;
         int posicion = 1;
         while (actual != null) {
             if (actual.getDatos().equals(valor)) {
@@ -63,9 +63,9 @@ public class SimpleLinkedList<I> {
         }
         return -1;
     }
-        
-        public boolean actualizar(I nuevo, I viejo) {
-        Node<I> actual = cabeza;
+
+        public boolean actualizar(Contacto nuevo, Contacto viejo) {
+        Node<Contacto> actual = cabeza;
         while (actual != null) {
             if (actual.getDatos().equals(viejo)) {
                 actual.setDatos(nuevo);
@@ -75,7 +75,7 @@ public class SimpleLinkedList<I> {
         }
         return false;
 }
-    public boolean eliminarNodo(I valor) {
+    public boolean eliminarNodo(Contacto valor) {
         if (cabeza == null){
             return false;
         }
@@ -88,8 +88,8 @@ public class SimpleLinkedList<I> {
             return false;
         }
 
-        Node<I> actual = cabeza;
-        Node<I> anterior = cabeza.getNext();
+        Node<Contacto> actual = cabeza;
+        Node<Contacto> anterior = cabeza.getNext();
 
         while (actual != null) {
             if (actual.getNext().getDatos().equals(valor)){

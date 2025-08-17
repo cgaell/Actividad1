@@ -1,23 +1,23 @@
 package Codigo;
 
 
-public class DoubleLinkedList<I> {
-    private Node<I> cabeza;
-    private Node<I> cola;
+public class DoubleLinkedList<Contacto> {
+    private Node<Contacto> cabeza;
+    private Node<Contacto> cola;
 
     public DoubleLinkedList() {
         this.cabeza = null;
         this.cola = null;
     }
-    public DoubleLinkedList(Node<I> cabeza, Node<I> cola) {
+    public DoubleLinkedList(Node<Contacto> cabeza, Node<Contacto> cola) {
         this.cabeza = cabeza;
         this.cola = cola;
     }
    
     
 
-    public void insertarCabeza(I valor) {
-        Node<I> nuevoNodo = new Node<>(valor);;
+    public void insertarCabeza(Contacto valor) {
+        Node<Contacto> nuevoNodo = new Node<>(valor);
         if (this.cabeza == null) {
 
             this.cola = nuevoNodo;
@@ -30,9 +30,9 @@ public class DoubleLinkedList<I> {
 
         }
     }
-    
-    public void insertarCola(I valor) {
-        Node<I> nuevoNodo = new Node<>(valor);
+
+    public void insertarCola(Contacto valor) {
+        Node<Contacto> nuevoNodo = new Node<>(valor);
         if (this.cabeza == null) {
             cabeza = nuevoNodo;
             cola = nuevoNodo;
@@ -45,7 +45,7 @@ public class DoubleLinkedList<I> {
     }
 
     public void mostrarLista() {
-        Node<I> actual = this.cabeza;
+        Node<Contacto> actual = this.cabeza;
         while (actual != null) {
             System.out.print(actual.getDatos());
             if (actual.getNext() != null) {
@@ -58,7 +58,7 @@ public class DoubleLinkedList<I> {
 
 
     public void mostrarReversa() {
-    Node<I> actual = this.cola;
+    Node<Contacto> actual = this.cola;
     while (actual != null) {
         System.out.print(actual.getDatos());
         if (actual.getAnterior() != null) {
@@ -67,8 +67,8 @@ public class DoubleLinkedList<I> {
     }
     System.out.println();
 }
-public int buscar( I valor) {
-    Node<I> actual = this.cabeza;
+public int buscar(Contacto valor) {
+    Node<Contacto> actual = this.cabeza;
     int posicion = 1;
     while (actual != null) {
         if (actual.getDatos().equals(valor)) {
@@ -81,8 +81,8 @@ public int buscar( I valor) {
     return -1;
 }
 
-    public boolean actualizar(I viejo, I nuevo) {
-        Node<I> actual = this.cabeza;
+    public boolean actualizar(Contacto viejo, Contacto nuevo) {
+        Node<Contacto> actual = this.cabeza;
         while (actual != null) {
             if (actual.getDatos().equals(viejo)) {
                 actual.setDatos(nuevo);
@@ -92,7 +92,7 @@ public int buscar( I valor) {
         }
         return false;
     }
-    public void eliminarNodo(I valor) {
+    public void eliminarNodo(Contacto valor) {
         if (cabeza == null) {
             return;
         }
@@ -102,8 +102,8 @@ public int buscar( I valor) {
             }
                 return;
         }
-        Node<I> actual = cabeza;
-        Node<I> anterior = null;
+        Node<Contacto> actual = cabeza;
+        Node<Contacto> anterior = null;
 
         while (actual != null) {
             if (actual.getDatos().equals(valor)) {

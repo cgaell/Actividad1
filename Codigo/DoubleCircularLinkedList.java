@@ -1,17 +1,17 @@
 package Codigo;
 
 
-public class DoubleCircularLinkedList<I> {
-    private Node<I> cabeza;
-    private Node<I> cola;
+public class DoubleCircularLinkedList<Contacto> {
+    private Node<Contacto> cabeza;
+    private Node<Contacto> cola;
 
     public DoubleCircularLinkedList() {
         this.cabeza = null;
         this.cola = null;
     }
 
-    public void insertarCabeza(I valor) {
-        Node<I> nuevoNodo = new Node<>(valor);
+    public void insertarCabeza(Contacto valor) {
+        Node<Contacto> nuevoNodo = new Node<>(valor);
         if (cabeza == null) {
             cabeza = nuevoNodo;
             cola = nuevoNodo;
@@ -28,8 +28,8 @@ public class DoubleCircularLinkedList<I> {
         }
     }
 
-    public void insertarCola(I valor) {
-        Node<I> nuevoNodo = new Node<>(valor);
+    public void insertarCola(Contacto valor) {
+        Node<Contacto> nuevoNodo = new Node<>(valor);
         if (cabeza == null) {
             cabeza = nuevoNodo;
             cola = nuevoNodo;
@@ -47,7 +47,7 @@ public class DoubleCircularLinkedList<I> {
     public void mostrarLista() {
         if (cabeza == null) return;
 
-        Node<I> actual = cabeza;
+        Node<Contacto> actual = cabeza;
         do {
             System.out.print(actual.getDatos());
             actual = actual.getNext();
@@ -61,7 +61,7 @@ public class DoubleCircularLinkedList<I> {
     public void mostrarReversa() {
         if (cola == null) return;
 
-        Node<I> actual = cola;
+        Node<Contacto> actual = cola;
         do {
             System.out.print(actual.getDatos());
             actual = actual.getAnterior();
@@ -72,10 +72,10 @@ public class DoubleCircularLinkedList<I> {
         System.out.println();
     }
 
-    public int buscar(I valor) {
+    public int buscar(Contacto valor) {
         if (cabeza == null) return -1;
 
-        Node<I> actual = cabeza;
+        Node<Contacto> actual = cabeza;
         int posicion = 1;
         do {
             if (actual.getDatos().equals(valor)) {
@@ -89,10 +89,10 @@ public class DoubleCircularLinkedList<I> {
         return -1;
     }
 
-    public boolean actualizar(I viejo, I nuevo) {
+    public boolean actualizar(Contacto viejo, Contacto nuevo) {
         if (cabeza == null) return false;
 
-        Node<I> actual = cabeza;
+        Node<Contacto> actual = cabeza;
         do {
             if (actual.getDatos().equals(viejo)) {
                 actual.setDatos(nuevo);
@@ -104,10 +104,10 @@ public class DoubleCircularLinkedList<I> {
         return false;
     }
 
-    public void eliminarNodo(I valor) {
+    public void eliminarNodo(Contacto valor) {
         if (cabeza == null) return;
 
-        Node<I> actual = cabeza;
+        Node<Contacto> actual = cabeza;
 
         do {
             if (actual.getDatos().equals(valor)) {
