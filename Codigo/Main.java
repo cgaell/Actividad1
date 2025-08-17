@@ -1,9 +1,9 @@
-package Actividad1.Codigo;
+package Codigo;
+import Codigo.SimpleLinkedList;
+import Codigo.DoubleLinkedList;
+import Codigo.DoubleCircularLinkedList;
+import Codigo.Contacto;
 import java.util.*;
-import Actividad1.Codigo.SimpleLinkedList;
-import Actividad1.Codigo.DoubleLinkedList;
-import Actividad1.Codigo.DoubleCircularLinkedList;
-import Actividad1.Codigo.Contacto;
 
 
 public class Main {
@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         limpiar();
 
-        int tipodelista;
+        int tipodelista = 0;
         do {
             try {
                 System.out.println("--- MENU ---");
@@ -27,7 +27,7 @@ public class Main {
                 tipodelista= scanner.nextInt();
                 scanner.nextLine();
 
-                switch (args) {
+                switch (tipodelista) {
                     case 1:
                         limpiar();
                         menuListaSimple();
@@ -363,6 +363,37 @@ private static void menuListaDoble(){
             }
             limpiar();
         } while (opcion != 0);
+    }
+    private static void pausar() {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("Presiona Enter para poder continuar");
+        try {
+            scanner.nextLine();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private static void limpiar() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+    private static void ejemplosListaSimple() {
+        DataTypeExamples ejemplo = new DataTypeExamples();
+        ejemplo.ejemploListaSimple();
+        limpiar();
+    }
+
+    private static void ejemplosListaDoble() {
+        DataTypeExamples ejemplo = new DataTypeExamples();
+        ejemplo.ejemploListaDoble();
+        limpiar();
+    }
+
+    private static void ejemplosListaCircular() {
+        DataTypeExamples ejemplo = new DataTypeExamples();
+        ejemplo.ejemploListaCircular();
+        limpiar();
     }
 
 }

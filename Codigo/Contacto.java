@@ -1,4 +1,4 @@
-package Actividad1.Actividad1.Codigo;
+package Codigo;
 
 public class Contacto {
     private String nombre;
@@ -16,7 +16,7 @@ public class Contacto {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
     public void setTelefono(String telefono) {

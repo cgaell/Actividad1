@@ -1,4 +1,4 @@
-package Actividad1.Actividad1.Codigo;
+package Codigo;
 
 
 public class DoubleCircularLinkedList<I> {
@@ -104,7 +104,7 @@ public class DoubleCircularLinkedList<I> {
         return false;
     }
 
-    public void borrar(I valor) {
+    public void eliminarNodo(I valor) {
         if (cabeza == null) return;
 
         Node<I> actual = cabeza;

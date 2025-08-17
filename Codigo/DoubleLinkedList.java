@@ -1,4 +1,4 @@
-package Actividad1.Actividad1.Codigo;
+package Codigo;
 
 
 public class DoubleLinkedList<I> {
