@@ -92,12 +92,12 @@ public int buscar( I valor) {
         }
         return false;
     }
-    public void borrar(I valor) {
+    public void eliminarNodo(I valor) {
         if (cabeza == null) {
             return;
         }
         if (cabeza.getNext() == null) {
-            if (cabeza.getDatos().equals(valor)) {
+            if (cabeza.getNext().equals(valor)) {
                 cabeza = null;            
             }
                 return;

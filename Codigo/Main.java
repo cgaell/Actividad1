@@ -1,5 +1,10 @@
-package Actividad1.Actividad1.Codigo;
+package Actividad1.Codigo;
 import java.util.*;
+import Actividad1.Codigo.SimpleLinkedList;
+import Actividad1.Codigo.DoubleLinkedList;
+import Actividad1.Codigo.DoubleCircularLinkedList;
+import Actividad1.Codigo.Contacto;
+
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
@@ -10,7 +15,7 @@ public class Main {
         do {
             try {
                 System.out.println("--- MENU ---");
-                System.out.println("Que tipo de lista usaras?");
+                System.out.println("Que quisieras hacer?");
                 System.out.println("1. Usar Lista Simple");
                 System.out.println("2. Usar Lista Doble");
                 System.out.println("3. Usar Lista Circular");
@@ -74,14 +79,14 @@ public class Main {
         int opcion = 0;
         do {
             try{
-                System.out.println("---MENU LISTA SIMPLE");
+                System.out.println("---MENU LISTA SIMPLE---");
                 System.out.println("0. Regresar al menu principal");
-                System.out.println("1. Insertar elemento al principio de la lista");
-                System.out.println("2. Insertar elemento al final de la lista");
-                System.out.println("3. Buscar elemento");
-                System.out.println("4. Borrar elemento");
-                System.out.println("5. Actualizar elemento");
-                System.out.println("6. Imprimir lista");
+                System.out.println("1. Insertar contacto al principio de la lista");
+                System.out.println("2. Insertar contacto al final de la lista");
+                System.out.println("3. Buscar contacto");
+                System.out.println("4. Borrar contacto");
+                System.out.println("5. Actualizar contacto");
+                System.out.println("6. Imprimir lista de contactos");
                 System.out.print("Seleccione una opcion: ");
                 opcion = scanner.nextInt();
                 scanner.nextLine();
@@ -111,11 +116,12 @@ public class Main {
                         String direccion = scanner.nextLine();
                         nuevoContacto = new Contacto(nombre, telefono, direccion);
                         lista.insertarCola(nuevoContacto);
+                        System.out.println("Contacto agregado");
                         break;
                     case 3:
                         System.out.print("Ingrese el nombre del contacto a buscar: ");
                         String buscarNombre = scanner.nextLine();
-                        int posicion = lista.buscar(new Contacto(buscarNombre, ""));
+                        int posicion = lista.buscar(new Contacto(buscarNombre, "", ""));
                         if (posicion == -1) {
                             System.out.println("Contacto no encontrado.");
                         } else {
@@ -123,18 +129,240 @@ public class Main {
                         }
                         break;
                     case 4:
-                        // Implementar borrar elemento
+                        System.out.println("Ingrese el contacto a eliminar: ");
+                        String eliminarNombre = scanner.nextLine();
+                        lista.eliminarNodo(nuevoContacto);
+                        System.out.println("Contacto eliminado");
                         break;
                     case 5:
-                        // Implementar actualizar elemento
+                        System.out.println("Ingrese el contacto a actualizar: ");
+                        String viejoNombre = scanner.nextLine();
+                        System.out.println("Ingrese el nuevo nombre del contacto: ");
+                        String nuevoNombre = scanner.nextLine();
+                        System.out.println("Ingrese el nuevo telefono del contacto: ");
+                        String nuevoTelefono = scanner.nextLine();
+                        System.out.println("Ingrese la nueva direccion del contacto: ");
+                        String nuevaDireccion = scanner.nextLine();
+                        Contacto nuevoContacto = new Contacto(nuevoNombre, nuevoTelefono, nuevaDireccion);
+                        lista.actualizar(viejoNombre, nuevoContacto);
                         break;
                     case 6:
                         lista.mostrarLista();
                         break;
                     default:
-                        System.out.println("Opcion no valida");
+                        System.out.println("Elije una opcion valida");
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+                scanner.nextLine();
+                opcion = -1;
+                System.out.println("Opcion no valida. Intente de nuevo.");
+                pausar();
             }
-        }
+            limpiar();
+        } while (opcion != 0);
     }
+
+private static void menuListaDoble(){
+        DoubleLinkedList<Contacto> lista = new DoubleLinkedList<>();
+        int opcion = 0;
+        do {
+            try{
+                System.out.println("---MENU LISTA DOBLE---");
+                System.out.println("0. Regresar al menu principal");
+                System.out.println("1. Insertar contacto al principio de la lista");
+                System.out.println("2. Insertar contacto al final de la lista");
+                System.out.println("3. Buscar contacto");
+                System.out.println("4. Borrar contacto");
+                System.out.println("5. Actualizar contacto");
+                System.out.println("6. Imprimir lista de contactos");
+                System.out.println("7. Imprimir lista de contactos en reversa");
+                System.out.print("Seleccione una opcion: ");
+                opcion = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (opcion) {
+                    case 0:
+                        System.out.println("Regresando al menu principal...");
+                        break;
+                    case 1:
+                        System.out.print("Ingrese el nombre del contacto: ");
+                        String nombre = scanner.nextLine();
+                        System.out.print("Ingrese el telefono del contacto: ");
+                        String telefono = scanner.nextLine();
+                        System.out.println("Ingrese la direccion del contacto: ");
+                        String direccion = scanner.nextLine();
+                        Contacto nuevoContacto = new Contacto(nombre, telefono, direccion);
+                        lista.insertarCabeza(nuevoContacto);
+                        System.out.println("Contacto agregado");
+                        break;
+                    case 2:
+                        System.out.print("Ingrese el nombre del contacto: ");
+                        nombre = scanner.nextLine();
+                        System.out.print("Ingrese el telefono del contacto: ");
+                        telefono = scanner.nextLine();
+                        System.out.println("Ingrese la direccion del contacto: ");
+                        direccion = scanner.nextLine();
+                        nuevoContacto = new Contacto(nombre, telefono, direccion);
+                        lista.insertarCola(nuevoContacto);
+                        System.out.println("Contacto agregado");
+                        break;
+                    case 3:
+                        System.out.print("Ingrese el nombre del contacto a buscar: ");
+                        String buscarNombre = scanner.nextLine();
+                        int posicion = lista.buscar(new Contacto(buscarNombre, "", ""));
+                        if (posicion == -1) {
+                            System.out.println("Contacto no encontrado.");
+                        } else {
+                            System.out.println("Contacto encontrado en la posicion: " + posicion);
+                        }
+                        break;
+                    case 4:
+                        System.out.println("Ingrese el contacto a eliminar: ");
+                        String eliminarNombre = scanner.nextLine();
+                        lista.eliminarNodo(nuevoContacto);
+                        System.out.println("Contacto eliminado");
+                        pausar();
+                        break;
+
+                    case 5:
+                        System.out.println("Ingrese el contacto a actualizar: ");
+                        String viejoNombre = scanner.nextLine();
+                        System.out.println("Ingrese el nuevo nombre del contacto: ");
+                        String nuevoNombre = scanner.nextLine();
+                        System.out.println("Ingrese el nuevo telefono del contacto: ");
+                        String nuevoTelefono = scanner.nextLine();
+                        System.out.println("Ingrese la nueva direccion del contacto: ");
+                        String nuevaDireccion = scanner.nextLine();
+                        Contacto actualizadoContacto = new Contacto(nuevoNombre, nuevoTelefono, nuevaDireccion);
+                        lista.actualizar(viejoNombre, actualizadoContacto);
+                        break;
+
+                    case 6:
+                        lista.mostrarLista();
+                        pausar();
+                        break;
+
+                    case 7:
+                        lista.mostrarReversa();
+                        pausar();
+                        break;
+                    default:
+                        opcion = -1;
+                        System.out.println("Opcion no valida");
+                        pausar();
+                        
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    scanner.nextLine();
+                    opcion = -1;
+                    System.out.println("Opcion no valida. Intente de nuevo.");
+                    pausar();
+                }
+                limpiar();
+            } while ((opcion!= 0));
+                
+        }
+        private static void menuListaCircular(){
+        DoubleCircularLinkedList<Contacto> lista = new DoubleCircularLinkedList<>();
+        int opcion = 0;
+        do {
+            try{
+
+                System.out.println("---MENU LISTA CIRCULAR---");
+                System.out.println("0. Regresar al menu principal");
+                System.out.println("1. Insertar contacto al principio de la lista");
+                System.out.println("2. Insertar contacto al final de la lista");
+                System.out.println("3. Buscar contacto en la lista");
+                System.out.println("4. Eliminar contacto de la lista");
+                System.out.println("5. Actualizar contacto en la lista");
+                System.out.println("6. Mostrar lista");
+                System.out.println("7. Mostrar lista en orden inverso");
+                System.out.print("Seleccione una opcion: ");
+                opcion = scanner.nextInt();
+                scanner.nextLine();
+
+                switch (opcion) {
+                    case 0:
+                    System.out.println("Regresando al menu principal...");
+                    break;
+                    case 1:
+                     System.out.print("Ingrese el nombre del contacto: ");
+                        String nombre = scanner.nextLine();
+                        System.out.print("Ingrese el telefono del contacto: ");
+                        String telefono = scanner.nextLine();
+                        System.out.println("Ingrese la direccion del contacto: ");
+                        String direccion = scanner.nextLine();
+                        Contacto nuevoContacto = new Contacto(nombre, telefono, direccion);
+                        lista.insertarCabeza(nuevoContacto);
+                        System.out.println("Contacto agregado");
+                        break;
+                    case 2:
+                    System.out.print("Ingrese el nombre del contacto: ");
+                        nombre = scanner.nextLine();
+                        System.out.print("Ingrese el telefono del contacto: ");
+                        telefono = scanner.nextLine();
+                        System.out.println("Ingrese la direccion del contacto: ");
+                        String direccion = scanner.nextLine();
+                        nuevoContacto = new Contacto(nombre, telefono, direccion);
+                        lista.insertarCola(nuevoContacto);
+                        System.out.println("Contacto agregado");
+                        break;
+                    case 3:
+                    System.out.print("Ingrese el nombre del contacto a buscar: ");
+                        String buscarNombre = scanner.nextLine();
+                        int posicion = lista.buscar(new Contacto(buscarNombre, "", ""));
+                        if (posicion == -1) {
+                            System.out.println("Contacto no encontrado.");
+                        } else {
+                            System.out.println("Contacto encontrado en la posicion: " + posicion);
+                        }
+                        break;
+                    case 4:
+                    System.out.println("Ingrese el contacto a eliminar: ");
+                        String eliminarNombre = scanner.nextLine();
+                        lista.eliminarNodo(nuevoContacto);
+                        System.out.println("Contacto eliminado");
+                        pausar();
+                        break;
+                    case 5:
+                    System.out.println("Ingrese el contacto a actualizar: ");
+                        String viejoNombre = scanner.nextLine();
+                        System.out.println("Ingrese el nuevo nombre del contacto: ");
+                        String nuevoNombre = scanner.nextLine();
+                        System.out.println("Ingrese el nuevo telefono del contacto: ");
+                        String nuevoTelefono = scanner.nextLine();
+                        System.out.println("Ingrese la nueva direccion del contacto: ");
+                        String nuevaDireccion = scanner.nextLine();
+                        Contacto actualizadoContacto = new Contacto(nuevoNombre, nuevoTelefono, nuevaDireccion);
+                        lista.actualizar(viejoNombre, actualizadoContacto);
+                        break;
+                    case 6:
+                     lista.mostrarLista();
+                     System.out.println("(vuelve a la cabeza)");
+                        pausar();
+                        break;
+                    case 7:
+                    lista.mostrarReversa();
+                    System.out.println("(vuelve a la cola)");
+                        pausar();
+                        break;
+                    default:
+                    opcion = -1;
+                    System.out.println("Opcion no valida");
+                    pausar();
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                scanner.nextLine();
+                opcion = -1;
+                System.out.println("Opcion no valida");
+                pausar();
+            }
+            limpiar();
+        } while (opcion != 0);
+    }
+
 }
