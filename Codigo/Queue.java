@@ -1,28 +1,27 @@
 package Codigo;
 
 public class Queue<T> {
-    public static final int CAPACITY = 1000;
-
-    private T[] datos;
-    private int size = 0;
+    
+    private SimpleLinkedList<T> datos;
+    
 
     public Queue() {
-        datos = (T[]) new Object[CAPACITY];
+        this.datos = new SimpleLinkedList<>();
     }
 
 
 
     public boolean isEmpty() {
-        return (this.size == 0);
+        return (this.datos.getCabeza() == null);
     }
 
     public int size() {
         return (this.size);
     }
 
-    public void push(T doc) {
+    public void push(T com) {
         // agrega en el tope de la cola el valor correspondiente
-        this.datos[this.size] = doc;
+        this.datos[this.size] = com;
         // aumenta el tamaño de la cola
         this.size++;
     }
