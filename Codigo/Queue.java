@@ -16,30 +16,26 @@ public class Queue<T> {
     }
 
     public int size() {
-        return (this.size);
+        int size = 0;
+        Node<T> actual = this.datos.getCabeza();
+        while (actual != null) {
+            size++;
+            actual = actual.getNext();
+        }
+        return size;
     }
 
     public void push(T com) {
         // agrega en el tope de la cola el valor correspondiente
-        this.datos[this.size] = com;
-        // aumenta el tamaño de la cola
-        this.size++;
+        this.datos.insertarCola(com);
     }
 
     public T pop() throws Exception {
-        T resultado = null;
         if (this.isEmpty()) {
             throw new Exception("La cola está vacía");
         }
-        resultado = this.datos[0];
-        for (int i=0;i<this.size-1;i++){
-   
-            this.datos[i]=this.datos[i+1];
-        }
-
-        this.datos[this.size - 1] = null; // Garbage collector
-
-        this.size--;
+        T resultado = this.datos.getCabeza().getDatos();
+        this.datos.eliminarNodo(resultado);
         return resultado;
     }
 
@@ -48,7 +44,7 @@ public class Queue<T> {
         if (this.isEmpty()) {
             throw new Exception("La cola está vacía");
         }
-        resultado = this.datos[0];
+        resultado = this.datos.getCabeza().getDatos();
         return resultado;
     }
 }

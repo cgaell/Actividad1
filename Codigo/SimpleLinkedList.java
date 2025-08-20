@@ -75,7 +75,7 @@ public class SimpleLinkedList<T> {
         }
         return false;
 }
-    public boolean eliminarNodo(Contacto valor) {
+    public boolean eliminarNodo(T valor) {
         if (cabeza == null){
             return false;
         }
@@ -85,7 +85,7 @@ public class SimpleLinkedList<T> {
                 cabeza = null;
                 return true;
             }
-            return false;
+            
         }
 
         Node<T> actual = cabeza;

@@ -64,6 +64,7 @@ public class DoubleLinkedList<Contacto> {
         if (actual.getAnterior() != null) {
             System.out.print(" <-> ");
         }
+        actual = actual.getAnterior();
     }
     System.out.println();
 }
