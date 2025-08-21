@@ -21,7 +21,7 @@ public class Main {
             System.out.println("4. Deshacer último proceso");
             System.out.println("5. Mostrar procesos");
             System.out.println("6. Salir");
-            System.out.print("Ingrese una opción (1-6): ");
+            System.out.print("Ingrese una opción: ");
             
             
             try {
