@@ -31,13 +31,18 @@ public class Queue<T> {
     }
 
     public T pop() throws Exception {
-        if (this.isEmpty()) {
-            throw new Exception("La cola está vacía");
-        }
-        T resultado = this.datos.getCabeza().getDatos();
-        this.datos.eliminarNodo(resultado);
-        return resultado;
+    if (this.isEmpty()) {
+        throw new Exception("La cola está vacía");
     }
+    Node<T> cabeza = this.datos.getCabeza();
+    T resultado = cabeza.getDatos();
+    
+    // Mover la cabeza al siguiente nodo
+    this.datos = new SimpleLinkedList<>(cabeza.getNext());
+    
+    return resultado;
+}
+
 
     public T peek() throws Exception {
         T resultado = null;

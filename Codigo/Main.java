@@ -8,7 +8,7 @@ public class Main {
     private static Stack<SimpleLinkedList<String>> historial = new Stack<>();
     private static Queue<SimpleLinkedList<String>> procesosEnCola = new Queue<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         int opcion = 0;
 
@@ -67,36 +67,53 @@ public class Main {
 
 
     private static void realizarProceso(Scanner scanner) {
-        System.out.print("Ingrese el nombre del proceso: ");
-        String proceso = scanner.nextLine();
-        
-        // Agregamos lo ingresado dentro de la lista enlazada
-        SimpleLinkedList<String> procesoLista = new SimpleLinkedList<>();
-        procesoLista.insertarCabeza(proceso);
-
-        // Guardamos el proceso dentro de la fila y de la pila
-        historial.push(procesoLista); 
-        procesosEnCola.push(procesoLista); 
-        
-        System.out.println("Proceso '" + proceso + "' añadido al historial y a la cola.");
-        System.out.println();
-    }
-
-    // 2. Ejecutar proceso
-    private static void ejecutarProceso() {
+    int cantidad = 0;
+    // Pedir cuántos procesos se van a agregar
+    while (true) {
+        System.out.print("¿Cuántos procesos deseas agregar?: ");
         try {
-            // Creamos la lista enlazada para el proceso en ejecución en la cual quitara y almacenara los datos
-            SimpleLinkedList<String> procesoLista = procesosEnCola.pop();
-            if (procesoLista != null) {
-                System.out.println("Ejecutando proceso: " + procesoLista.getCabeza().getDatos());
+            cantidad = Integer.parseInt(scanner.nextLine());
+            if (cantidad < 1) {
+                System.out.println("Debes ingresar un número mayor a 0.");
+                continue;
             }
-            System.out.println();
-        } catch (Exception e) {
-            System.out.println("Error al ejecutar el proceso: " + e.getMessage());
-            System.out.println();
+            break;
+        } catch (NumberFormatException e) {
+            System.out.println("Oye, no acepto otra cosa que no sea números.");
         }
     }
 
+    // Bucle para ingresar los nombres de los procesos
+    for (int i = 1; i <= cantidad; i++) {
+        System.out.print("Ingrese el nombre del proceso " + i + ": ");
+        String proceso = scanner.nextLine();
+
+        // Crear la lista enlazada para el proceso
+        SimpleLinkedList<String> procesoLista = new SimpleLinkedList<>();
+        procesoLista.insertarCabeza(proceso);
+
+        // Guardar en historial y en la cola
+        historial.push(procesoLista);
+        procesosEnCola.push(procesoLista); // aquí usamos push() porque es Queue
+
+        System.out.println("Proceso '" + proceso + "' añadido al historial y a la cola.");
+    }
+    System.out.println(); // salto de línea al terminar
+}
+
+    // 2. Ejecutar proceso
+    private static void ejecutarProceso() {
+    try {
+        SimpleLinkedList<String> procesoLista = procesosEnCola.pop();
+        if (procesoLista != null) {
+            System.out.println("Ejecutando proceso: " + procesoLista.getCabeza().getDatos());
+        }
+        System.out.println();
+    } catch (Exception e) {
+        System.out.println("Error al ejecutar el proceso: " + e.getMessage());
+        System.out.println();
+    }
+}
     
     private static void mostrarHistorial() {
       if (historial.isEmpty()) {
@@ -131,8 +148,8 @@ public class Main {
                 while (actual != null) {
                     actual.getDatos().mostrarLista(); 
                     actual = actual.getNext();
-                    System.out.println();
                 }
+                System.out.println();
             } else {
                 System.out.println("No hay procesos en la cola.");
                 System.out.println();
@@ -141,4 +158,5 @@ public class Main {
             System.out.println("Error al mostrar los procesos: " + e.getMessage());
         }
     }
+    
 }
