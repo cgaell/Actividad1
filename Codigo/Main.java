@@ -1,408 +1,130 @@
 package Codigo;
-import Codigo.SimpleLinkedList;
-import Codigo.DoubleLinkedList;
-import Codigo.DoubleCircularLinkedList;
-import Codigo.Contacto;
+
 import java.util.*;
 
-
 public class Main {
-    public static Scanner scanner = new Scanner(System.in);
+
+    // Creamos las estructuras de datos para el historial y los procesos
+    private static Stack<SimpleLinkedList<String>> historial = new Stack<>();
+    private static Queue<SimpleLinkedList<String>> procesosEnCola = new Queue<>();
+
     public static void main(String[] args) {
-        limpiar();
+        Scanner scanner = new Scanner(System.in);
+        int opcion = 0;
 
-        int tipodelista = 0;
-        do {
+       // Ciclo del menu principal, en caso de que el usuario no haga caso o quiera hacer otra accion, se repetira indefinidamente hasta que quiera salir
+        while (true) {
+            System.out.println("=== HOLA USUARIO ===");
+            System.out.println("1. Realizar proceso");
+            System.out.println("2. Ejecutar proceso");
+            System.out.println("3. Mostrar historial de procesos");
+            System.out.println("4. Deshacer último proceso");
+            System.out.println("5. Mostrar procesos");
+            System.out.println("6. Salir");
+            System.out.print("Ingrese una opción (1-6): ");
+            
+            
             try {
-                System.out.println("--- MENU ---");
-                System.out.println("Que quisieras hacer?");
-                System.out.println("1. Usar Lista Simple");
-                System.out.println("2. Usar Lista Doble");
-                System.out.println("3. Usar Lista Circular");
-                System.out.println("4. Ejemplos Lista Simple");
-                System.out.println("5. Ejemplos Lista Doble");
-                System.out.println("6. Ejemplos Lista Circular");
-                System.out.println("7. Salir");
-                System.out.print("Seleccione una opcion:  ");
-                tipodelista= scanner.nextInt();
-                scanner.nextLine();
+                opcion = Integer.parseInt(scanner.nextLine());
 
-                switch (tipodelista) {
-                    case 1:
-                        limpiar();
-                        menuListaSimple();
-
-                    case 2:
-                        limpiar();
-                        menuListaDoble();
-                        break;
-
-                    case 3:
-                        limpiar();
-                        menuListaCircular();
-                        break;
-
-                    case 4:
-                        limpiar();
-                        ejemplosListaSimple();
-                        break;
-
-                    case 5:
-                        limpiar();
-                        ejemplosListaDoble();
-                        break;
-
-                    case 6:
-                        limpiar();
-                        ejemplosListaCircular();
-                        break;
-
-                    case 7:
-                        System.out.println("Adiosss...");
-                        System.exit(0);
-                        break;
-
-                    default:
-                        System.out.println("Opcion no valida");
-                        break;
+                if (opcion < 1 || opcion > 6) {
+                    System.out.println("Escribe del 1 al 6, los demas no hacen nada");
+                    System.out.println();
+                    continue; 
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("Por favor, ingrese un numero valido.");
-                scanner.nextLine(); // Limpiar el buffer
+
+            } catch (NumberFormatException e) {
+                System.out.println("Oye, no acepto otra cosa que no sea numeros");
+                System.out.println();
+                continue; 
             }
-        } while (tipodelista != 7);
 
-    }
-
-    private static void menuListaSimple(){
-        SimpleLinkedList<Contacto> lista = new SimpleLinkedList<>();
-        int opcion = 0;
-        do {
-            try{
-                System.out.println("---MENU LISTA SIMPLE---");
-                System.out.println("0. Regresar al menu principal");
-                System.out.println("1. Insertar contacto al principio de la lista");
-                System.out.println("2. Insertar contacto al final de la lista");
-                System.out.println("3. Buscar contacto");
-                System.out.println("4. Borrar contacto");
-                System.out.println("5. Actualizar contacto");
-                System.out.println("6. Imprimir lista de contactos");
-                System.out.print("Seleccione una opcion: ");
-                opcion = scanner.nextInt();
-                scanner.nextLine();
-
-
-                switch (opcion) {
-                    case 0:
-                        limpiar();
-                        break;
-                    case 1:
-                        System.out.print("Ingrese el nombre del contacto: ");
-                        String nombre = scanner.nextLine();
-                        System.out.print("Ingrese el telefono del contacto: ");
-                        String telefono = scanner.nextLine();
-                        System.out.println("Ingrese la direccion del contacto: ");
-                        String direccion = scanner.nextLine();
-                        Contacto nuevoContacto = new Contacto(nombre, telefono, direccion);
-                        lista.insertarCabeza(nuevoContacto);
-                        System.out.println("Contacto agregado");
-                        break;
-                    case 2:
-                        System.out.print("Ingrese el nombre del contacto: ");
-                        nombre = scanner.nextLine();
-                        System.out.print("Ingrese el telefono del contacto: ");
-                        telefono = scanner.nextLine();
-                        System.out.println("Ingrese la direccion del contacto: ");
-                        direccion = scanner.nextLine(); // Usar la variable ya declarada
-                        nuevoContacto = new Contacto(nombre, telefono, direccion);
-                        lista.insertarCola(nuevoContacto);
-                        System.out.println("Contacto agregado");
-                        break;
-                    case 3:
-                        System.out.print("Ingrese el nombre del contacto a buscar: ");
-                        String buscarNombre = scanner.nextLine();
-                        int posicion = lista.buscar(new Contacto(buscarNombre, "", ""));
-                        if (posicion == -1) {
-                            System.out.println("Contacto no encontrado.");
-                        } else {
-                            System.out.println("Contacto encontrado en la posicion: " + posicion);
-                        }
-                        break;
-                    case 4:
-                        System.out.println("Ingrese el contacto a eliminar: ");
-                        String eliminarNombre = scanner.nextLine();
-                        Contacto contactoEliminar = new Contacto(eliminarNombre, "", "");
-                        lista.eliminarNodo(contactoEliminar);
-                        System.out.println("Contacto eliminado");
-                        break;
-                    case 5:
-                        System.out.println("Ingrese el contacto a actualizar: ");
-                        String viejoNombre = scanner.nextLine();
-                        System.out.println("Ingrese el nuevo nombre del contacto: ");
-                        String nuevoNombre = scanner.nextLine();
-                        System.out.println("Ingrese el nuevo telefono del contacto: ");
-                        String nuevoTelefono = scanner.nextLine();
-                        System.out.println("Ingrese la nueva direccion del contacto: ");
-                        String nuevaDireccion = scanner.nextLine();
-                        Contacto nuevoContactoActualizado = new Contacto(nuevoNombre, nuevoTelefono, nuevaDireccion);
-                        lista.actualizar(new Contacto(viejoNombre, "", ""), nuevoContactoActualizado);
-                        break;
-                    case 6:
-                        lista.mostrarLista();
-                        break;
-                    default:
-                        System.out.println("Elije una opcion valida");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                scanner.nextLine();
-                opcion = -1;
-                System.out.println("Opcion no valida. Intente de nuevo.");
-                pausar();
-            }
-            pausar();
-            limpiar();
-        } while (opcion != 0);
-    }
-
-private static void menuListaDoble(){
-        DoubleLinkedList<Contacto> lista = new DoubleLinkedList<>();
-        int opcion = 0;
-        do {
-            try{
-                System.out.println("---MENU LISTA DOBLE---");
-                System.out.println("0. Regresar al menu principal");
-                System.out.println("1. Insertar contacto al principio de la lista");
-                System.out.println("2. Insertar contacto al final de la lista");
-                System.out.println("3. Buscar contacto");
-                System.out.println("4. Borrar contacto");
-                System.out.println("5. Actualizar contacto");
-                System.out.println("6. Imprimir lista de contactos");
-                System.out.println("7. Imprimir lista de contactos en reversa");
-                System.out.print("Seleccione una opcion: ");
-                opcion = scanner.nextInt();
-                scanner.nextLine();
-
-                switch (opcion) {
-                    case 0:
-                        System.out.println("Regresando al menu principal...");
-                        break;
-                    case 1:
-                        System.out.print("Ingrese el nombre del contacto: ");
-                        String nombre = scanner.nextLine();
-                        System.out.print("Ingrese el telefono del contacto: ");
-                        String telefono = scanner.nextLine();
-                        System.out.println("Ingrese la direccion del contacto: ");
-                        String direccion = scanner.nextLine();
-                        Contacto nuevoContacto = new Contacto(nombre, telefono, direccion);
-                        lista.insertarCabeza(nuevoContacto);
-                        System.out.println("Contacto agregado");
-                        break;
-                    case 2:
-                        System.out.print("Ingrese el nombre del contacto: ");
-                        nombre = scanner.nextLine();
-                        System.out.print("Ingrese el telefono del contacto: ");
-                        telefono = scanner.nextLine();
-                        System.out.println("Ingrese la direccion del contacto: ");
-                        direccion = scanner.nextLine(); // Usar la variable ya declarada
-                        nuevoContacto = new Contacto(nombre, telefono, direccion);
-                        lista.insertarCola(nuevoContacto);
-                        System.out.println("Contacto agregado");
-                        break;
-                    case 3:
-                        System.out.print("Ingrese el nombre del contacto a buscar: ");
-                        String buscarNombre = scanner.nextLine();
-                        int posicion = lista.buscar(new Contacto(buscarNombre, "", ""));
-                        if (posicion == -1) {
-                            System.out.println("Contacto no encontrado.");
-                        } else {
-                            System.out.println("Contacto encontrado en la posicion: " + posicion);
-                        }
-                        break;
-                    case 4:
-                        System.out.println("Ingrese el contacto a eliminar: ");
-                        String eliminarNombre = scanner.nextLine();
-                        Contacto contactoEliminar = new Contacto(eliminarNombre, "", "");
-                        lista.eliminarNodo(contactoEliminar);
-                        System.out.println("Contacto eliminado");
-                        pausar();
-                        break;
-
-                    case 5:
-                        System.out.println("Ingrese el contacto a actualizar: ");
-                        String viejoNombre = scanner.nextLine();
-                        System.out.println("Ingrese el nuevo nombre del contacto: ");
-                        String nuevoNombre = scanner.nextLine();
-                        System.out.println("Ingrese el nuevo telefono del contacto: ");
-                        String nuevoTelefono = scanner.nextLine();
-                        System.out.println("Ingrese la nueva direccion del contacto: ");
-                        String nuevaDireccion = scanner.nextLine();
-                        Contacto actualizadoContacto = new Contacto(nuevoNombre, nuevoTelefono, nuevaDireccion);
-                        lista.actualizar(new Contacto(viejoNombre, "", ""), actualizadoContacto);
-                        break;      
-
-                    case 6:
-                        lista.mostrarLista();
-                        pausar();
-                        break;
-
-                    case 7:
-                        lista.mostrarReversa();
-                        pausar();
-                        break;
-                    default:
-                        opcion = -1;
-                        System.out.println("Opcion no valida");
-                        pausar();
-                        
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    scanner.nextLine();
-                    opcion = -1;
-                    System.out.println("Opcion no valida. Intente de nuevo.");
-                    pausar();
-                }
-                pausar();
-                limpiar();
-            } while ((opcion!= 0));
-                
-        }
-        private static void menuListaCircular(){
-        DoubleCircularLinkedList<Contacto> lista = new DoubleCircularLinkedList<>();
-        int opcion = 0;
-        do {
-            try{
-
-                System.out.println("---MENU LISTA CIRCULAR---");
-                System.out.println("0. Regresar al menu principal");
-                System.out.println("1. Insertar contacto al principio de la lista");
-                System.out.println("2. Insertar contacto al final de la lista");
-                System.out.println("3. Buscar contacto en la lista");
-                System.out.println("4. Eliminar contacto de la lista");
-                System.out.println("5. Actualizar contacto en la lista");
-                System.out.println("6. Mostrar lista");
-                System.out.println("7. Mostrar lista en orden inverso");
-                System.out.print("Seleccione una opcion: ");
-                opcion = scanner.nextInt();
-                scanner.nextLine();
-
-                switch (opcion) {
-                    case 0:
-                    System.out.println("Regresando al menu principal...");
+            switch (opcion) {
+                case 1:
+                    realizarProceso(scanner);
                     break;
-                    case 1:
-                     System.out.print("Ingrese el nombre del contacto: ");
-                        String nombre = scanner.nextLine();
-                        System.out.print("Ingrese el telefono del contacto: ");
-                        String telefono = scanner.nextLine();
-                        System.out.println("Ingrese la direccion del contacto: ");
-                        String direccion = scanner.nextLine();
-                        Contacto nuevoContacto = new Contacto(nombre, telefono, direccion);
-                        lista.insertarCabeza(nuevoContacto);
-                        System.out.println("Contacto agregado");
-                        break;
-                    case 2:
-                        System.out.print("Ingrese el nombre del contacto: ");
-                        nombre = scanner.nextLine();
-                        System.out.print("Ingrese el telefono del contacto: ");
-                        telefono = scanner.nextLine();
-                        System.out.println("Ingrese la direccion del contacto: ");
-                        direccion = scanner.nextLine(); // Usar la variable ya declarada
-                        nuevoContacto = new Contacto(nombre, telefono, direccion);
-                        lista.insertarCola(nuevoContacto);
-                        System.out.println("Contacto agregado");
-                        break;
-                    case 3:
-                    System.out.print("Ingrese el nombre del contacto a buscar: ");
-                        String buscarNombre = scanner.nextLine();
-                        int posicion = lista.buscar(new Contacto(buscarNombre, "", ""));
-                        if (posicion == -1) {
-                            System.out.println("Contacto no encontrado.");
-                        } else {
-                            System.out.println("Contacto encontrado en la posicion: " + posicion);
-                        }
-                        break;
-                    case 4:
-                    System.out.println("Ingrese el contacto a eliminar: ");
-                        String eliminarNombre = scanner.nextLine();
-                        Contacto contactoEliminar = new Contacto(eliminarNombre, "", "");
-                        lista.eliminarNodo(contactoEliminar);
-                        System.out.println("Contacto eliminado");
-                        pausar();
-                        break;
-                    case 5:
-                        System.out.println("Ingrese el contacto a actualizar: ");
-                        String viejoNombre = scanner.nextLine();
-                        System.out.println("Ingrese el nuevo nombre del contacto: ");
-                        String nuevoNombre = scanner.nextLine();
-                        System.out.println("Ingrese el nuevo telefono del contacto: ");
-                        String nuevoTelefono = scanner.nextLine();
-                        System.out.println("Ingrese la nueva direccion del contacto: ");
-                        String nuevaDireccion = scanner.nextLine();
-                        Contacto actualizadoContacto = new Contacto(nuevoNombre, nuevoTelefono, nuevaDireccion);
-                        lista.actualizar(new Contacto(viejoNombre, "", ""), actualizadoContacto);
-                        break;
-                    case 6:
-                     lista.mostrarLista();
-                     System.out.println("(vuelve a la cabeza)");
-                        pausar();
-                        break;
-                    case 7:
-                    lista.mostrarReversa();
-                    System.out.println("(vuelve a la cola)");
-                        pausar();
-                        break;
-                    default:
-                    opcion = -1;
-                    System.out.println("Opcion no valida");
-                    pausar();
-
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                scanner.nextLine();
-                opcion = -1;
-                System.out.println("Opcion no valida");
-                pausar();
+                case 2:
+                    ejecutarProceso();
+                    break;
+                case 3:
+                    mostrarHistorial();
+                    break;
+                case 4:
+                    deshacerUltimoProceso();
+                    break;
+                case 5:
+                    mostrarProcesos();
+                    break;
+                case 6:
+                    System.out.println("Gracias por usarme");
+                    scanner.close();
+                    return; 
+                default:
+                    System.out.println("No encontre esa opcion, Ingrese algo nuevamente.");
             }
-            pausar();
-            limpiar();
-        } while (opcion != 0);
-    }
-    private static void pausar() {
-        System.out.println("");
-        System.out.println("");
-        System.out.println("Presiona Enter para poder continuar");
-        try {
-            System.in.read();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
-    private static void limpiar() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-    private static void ejemplosListaSimple() {
-        DataTypeExamples ejemplo = new DataTypeExamples();
-        ejemplo.ejemploListaSimple();
-        pausar();
-        limpiar();
+
+
+    private static void realizarProceso(Scanner scanner) {
+        System.out.print("Ingrese el nombre del proceso: ");
+        String proceso = scanner.nextLine();
+        
+        // Agregamos lo ingresado dentro de la lista enlazada
+        SimpleLinkedList<String> procesoLista = new SimpleLinkedList<>();
+        procesoLista.insertarCabeza(proceso);
+
+        // Guardamos el proceso dentro de la fila y de la pila
+        historial.push(procesoLista); 
+        procesosEnCola.push(procesoLista); 
+        
+        System.out.println("Proceso '" + proceso + "' añadido al historial y a la cola.");
     }
 
-    private static void ejemplosListaDoble() {
-        DataTypeExamples ejemplo = new DataTypeExamples();
-        ejemplo.ejemploListaDoble();
-        pausar();
-        limpiar();
+    // 2. Ejecutar proceso
+    private static void ejecutarProceso() {
+        try {
+            // Creamos la lista enlazada para el proceso en ejecución en la cual quitara y almacenara los datos
+            SimpleLinkedList<String> procesoLista = procesosEnCola.pop();
+            System.out.println("Ejecutando proceso: " + procesoLista.getCabeza().getDatos());
+        } catch (Exception e) {
+            System.out.println("Error al ejecutar el proceso: " + e.getMessage());
+        }
     }
 
-    private static void ejemplosListaCircular() {
-        DataTypeExamples ejemplo = new DataTypeExamples();
-        ejemplo.ejemploListaCircular();
-        pausar();
-        limpiar();
+    
+    private static void mostrarHistorial() {
+        System.out.println("Historial de procesos:");
+        historial.show(); // Muestra las listas enlazadas
     }
 
+    
+    private static void deshacerUltimoProceso() {
+        try {
+            // Eliminamos el ultimo ingreso del usuario de la lista enlazada
+            SimpleLinkedList<String> procesoDeshecho = historial.pop();
+            System.out.println("Último proceso deshecho: " + procesoDeshecho.getCabeza().getDatos());
+        } catch (Exception e) {
+            System.out.println("Error al deshacer el proceso: " + e.getMessage());
+        }
+    }
+
+    private static void mostrarProcesos() {
+        System.out.println("Procesos en cola:");
+        try {
+            // Revisa si la fila no esta vacía
+            if (!procesosEnCola.isEmpty()) {
+                // Muestra los procesos que estan dentro de la cola
+                Node<SimpleLinkedList<String>> actual = procesosEnCola.datos.getCabeza();
+                while (actual != null) {
+                    actual.getDatos().mostrarLista(); 
+                    actual = actual.getNext();
+                }
+            } else {
+                System.out.println("No hay procesos en la cola.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar los procesos: " + e.getMessage());
+        }
+    }
 }

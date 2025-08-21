@@ -43,7 +43,7 @@ public class SimpleLinkedList<T> {
         while (actual != null) {
             System.out.print(actual.getDatos());
             if (actual.getNext() != null) {
-                System.out.print(" <-> ");
+                System.out.print(" -> ");
             }
             actual = actual.getNext();
         }
@@ -106,6 +106,7 @@ public class SimpleLinkedList<T> {
         }
           return false;  
     }
+
         
 }
 

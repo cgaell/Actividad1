@@ -2,7 +2,7 @@ package Codigo;
 
 public class Queue<T> {
     
-    private SimpleLinkedList<T> datos;
+    SimpleLinkedList<T> datos;
     
 
     public Queue() {
