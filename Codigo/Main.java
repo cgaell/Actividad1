@@ -79,6 +79,7 @@ public class Main {
         procesosEnCola.push(procesoLista); 
         
         System.out.println("Proceso '" + proceso + "' añadido al historial y a la cola.");
+        System.out.println();
     }
 
     // 2. Ejecutar proceso
@@ -87,8 +88,10 @@ public class Main {
             // Creamos la lista enlazada para el proceso en ejecución en la cual quitara y almacenara los datos
             SimpleLinkedList<String> procesoLista = procesosEnCola.pop();
             System.out.println("Ejecutando proceso: " + procesoLista.getCabeza().getDatos());
+            System.out.println();
         } catch (Exception e) {
             System.out.println("Error al ejecutar el proceso: " + e.getMessage());
+            System.out.println();
         }
     }
 
@@ -96,6 +99,7 @@ public class Main {
     private static void mostrarHistorial() {
         System.out.println("Historial de procesos:");
         historial.show(); // Muestra las listas enlazadas
+        System.out.println();
     }
 
     
@@ -106,6 +110,7 @@ public class Main {
             System.out.println("Último proceso deshecho: " + procesoDeshecho.getCabeza().getDatos());
         } catch (Exception e) {
             System.out.println("Error al deshacer el proceso: " + e.getMessage());
+            System.out.println();
         }
     }
 
@@ -119,9 +124,11 @@ public class Main {
                 while (actual != null) {
                     actual.getDatos().mostrarLista(); 
                     actual = actual.getNext();
+                    System.out.println();
                 }
             } else {
                 System.out.println("No hay procesos en la cola.");
+                System.out.println();
             }
         } catch (Exception e) {
             System.out.println("Error al mostrar los procesos: " + e.getMessage());
