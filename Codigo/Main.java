@@ -87,7 +87,9 @@ public class Main {
         try {
             // Creamos la lista enlazada para el proceso en ejecución en la cual quitara y almacenara los datos
             SimpleLinkedList<String> procesoLista = procesosEnCola.pop();
-            System.out.println("Ejecutando proceso: " + procesoLista.getCabeza().getDatos());
+            if (procesoLista != null) {
+                System.out.println("Ejecutando proceso: " + procesoLista.getCabeza().getDatos());
+            }
             System.out.println();
         } catch (Exception e) {
             System.out.println("Error al ejecutar el proceso: " + e.getMessage());
@@ -97,10 +99,15 @@ public class Main {
 
     
     private static void mostrarHistorial() {
-        System.out.println("Historial de procesos:");
-        historial.show(); // Muestra las listas enlazadas
-        System.out.println();
+      if (historial.isEmpty()) {
+        System.out.println("No hay procesos en el historial.");
+    } else {
+        for (SimpleLinkedList<String> proceso : historial) {
+            proceso.mostrarLista();
+        }
     }
+    System.out.println();
+}
 
     
     private static void deshacerUltimoProceso() {
