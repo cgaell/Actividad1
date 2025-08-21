@@ -13,7 +13,7 @@ public class Main {
         int opcion = 0;
 
        // Ciclo del menu principal, en caso de que el usuario no haga caso o quiera hacer otra accion, se repetira indefinidamente hasta que quiera salir
-        while (true) {
+        while (1 > 0) {
             System.out.println("=== HOLA USUARIO ===");
             System.out.println("1. Realizar proceso");
             System.out.println("2. Ejecutar proceso");
