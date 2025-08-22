@@ -101,7 +101,7 @@ public class Main {
     System.out.println(); // salto de línea al terminar
 }
 
-    // 2. Ejecutar proceso
+    
     private static void ejecutarProceso() {
     try {
         SimpleLinkedList<String> procesoLista = procesosEnCola.pop();
