@@ -121,18 +121,18 @@ public class Main {
     } else {
         System.out.println("=== Historial de procesos ===");
         // Recorremos la pila "temporalmente" sacando cada elemento
-        Stack<SimpleLinkedList<String>> temp = new Stack<>();
+        Stack<SimpleLinkedList<String>> temporal = new Stack<>();
 
         try {
             while (!historial.isEmpty()) {
                 SimpleLinkedList<String> proceso = historial.pop();
                 proceso.mostrarLista();
-                temp.push(proceso); // guardamos en temporal para no perder el historial
+                temporal.push(proceso); // guardamos en temporal para no perder el historial
             }
 
             // Volvemos a llenar la pila original
-            while (!temp.isEmpty()) {
-                historial.push(temp.pop());
+            while (!temporal.isEmpty()) {
+                historial.push(temporal.pop());
             }
         } catch (Exception e) {
             System.out.println("Error al mostrar historial: " + e.getMessage());
