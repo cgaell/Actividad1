@@ -115,12 +115,16 @@ public class Main {
     }
 }
     
-    private static void mostrarHistorial() {
-      if (historial.isEmpty()) {
-        System.out.println("No hay procesos en el historial.");
-    } else {
-        for (SimpleLinkedList<String> proceso : historial) {
-            proceso.mostrarLista();
+        private static void mostrarHistorial() {
+            if (historial.isEmpty()) {
+                System.out.println("No hay procesos en el historial.");
+            } else {
+                // Recorremos la lista enlazada directamente
+                Node<SimpleLinkedList<String>> actual = historial.getDatos().getCabeza();
+                while (actual != null) {
+            SimpleLinkedList<String> proceso = actual.getDatos();
+                proceso.mostrarLista();
+                actual = actual.getNext();
         }
     }
     System.out.println();

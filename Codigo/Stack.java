@@ -61,4 +61,7 @@ public class Stack<T> {
         return this.datos.getCabeza().getDatos();
     }
 
+    public SimpleLinkedList<T> getDatos() {
+        return this.datos;
+    }
 }
