@@ -115,16 +115,27 @@ public class Main {
     }
 }
     
-        private static void mostrarHistorial() {
-            if (historial.isEmpty()) {
-                System.out.println("No hay procesos en el historial.");
-            } else {
-                // Recorremos la lista enlazada directamente
-                Node<SimpleLinkedList<String>> actual = historial.getDatos().getCabeza();
-                while (actual != null) {
-            SimpleLinkedList<String> proceso = actual.getDatos();
+       private static void mostrarHistorial() {
+    if (historial.isEmpty()) {
+        System.out.println("No hay procesos en el historial.");
+    } else {
+        System.out.println("=== Historial de procesos ===");
+        // Recorremos la pila "temporalmente" sacando cada elemento
+        Stack<SimpleLinkedList<String>> temp = new Stack<>();
+
+        try {
+            while (!historial.isEmpty()) {
+                SimpleLinkedList<String> proceso = historial.pop();
                 proceso.mostrarLista();
-                actual = actual.getNext();
+                temp.push(proceso); // guardamos en temporal para no perder el historial
+            }
+
+            // Volvemos a llenar la pila original
+            while (!temp.isEmpty()) {
+                historial.push(temp.pop());
+            }
+        } catch (Exception e) {
+            System.out.println("Error al mostrar historial: " + e.getMessage());
         }
     }
     System.out.println();
