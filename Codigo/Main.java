@@ -60,7 +60,7 @@ public class Main {
                     scanner.close();
                     return; 
                 default:
-                    System.out.println("No encontre esa opcion, Ingrese algo nuevamente.");
+                    System.out.println("No encontre esa opcion, Ingrese algo nuevamente");
             }
         }
     }
@@ -74,18 +74,18 @@ public class Main {
         try {
             cantidad = Integer.parseInt(scanner.nextLine());
             if (cantidad < 1) {
-                System.out.println("Debes ingresar un número mayor a 0.");
+                System.out.println("Debes ingresar un número mayor a 0");
                 continue;
             }
             break;
         } catch (NumberFormatException e) {
-            System.out.println("Oye, no acepto otra cosa que no sea números.");
+            System.out.println("Oye, no acepto otra cosa que no sea números");
         }
     }
 
     // Bucle para ingresar los nombres de los procesos
     for (int i = 1; i <= cantidad; i++) {
-        System.out.print("Ingrese el nombre del proceso " + i + ": ");
+        System.out.print("Ingresa el nombre del proceso " + i + ": ");
         String proceso = scanner.nextLine();
 
         // Crear la lista enlazada para el proceso
@@ -96,7 +96,7 @@ public class Main {
         historial.push(procesoLista);
         procesosEnCola.push(procesoLista); // aquí usamos push() porque es Queue
 
-        System.out.println("Proceso '" + proceso + "' añadido al historial y a la cola.");
+        System.out.println("Proceso '" + proceso + "' añadido al historial y a la cola");
     }
     System.out.println(); // salto de línea al terminar
 }
@@ -117,7 +117,7 @@ public class Main {
     
        private static void mostrarHistorial() {
     if (historial.isEmpty()) {
-        System.out.println("No hay procesos en el historial.");
+        System.out.println("No hay procesos");
     } else {
         System.out.println("=== Historial de procesos ===");
         // Recorremos la pila "temporalmente" sacando cada elemento
@@ -146,9 +146,9 @@ public class Main {
         try {
             // Eliminamos el ultimo ingreso del usuario de la lista enlazada
             SimpleLinkedList<String> procesoDeshecho = historial.pop();
-            System.out.println("Último proceso deshecho: " + procesoDeshecho.getCabeza().getDatos());
+            System.out.println("Ultimo proceso eliminado: " + procesoDeshecho.getCabeza().getDatos());
         } catch (Exception e) {
-            System.out.println("Error al deshacer el proceso: " + e.getMessage());
+            System.out.println("Error al eliminar el proceso: " + e.getMessage());
             System.out.println();
         }
     }
@@ -166,7 +166,7 @@ public class Main {
                 }
                 System.out.println();
             } else {
-                System.out.println("No hay procesos en la cola.");
+                System.out.println("No hay procesos en segundo plano");
                 System.out.println();
             }
         } catch (Exception e) {
